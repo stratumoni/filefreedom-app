@@ -1,0 +1,193 @@
+@layer pages {
+  .page-head { display: grid; gap: var(--space-3); margin-bottom: var(--space-6); padding-top: var(--space-5); }
+  .page-head p { color: var(--c-muted); font-size: var(--text-md); }
+  .crumbs { display: flex; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-sm); color: var(--c-muted); list-style: none; padding: var(--space-5) 0 0; margin: 0 0 var(--space-4); }
+  .crumbs li + li::before { content: '/'; margin-right: var(--space-2); color: var(--c-border-strong); }
+  .crumbs { align-items: center; gap: var(--space-1); }
+  .crumbs li + li::before { margin-right: var(--space-1); }
+  .crumbs a { color: var(--c-muted); display: inline-flex; align-items: center; min-height: 1.75rem; padding-inline: 0.35rem; }
+  .section { margin-top: var(--space-8); display: grid; gap: var(--space-5); }
+  .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+  .section-head p { color: var(--c-muted); font-size: var(--text-sm); }
+
+  /* ---------- Home hero: a sky-blue stage with file stickers around a centred headline ---------- */
+  .hero { display: block; }
+  .hero-stage {
+    container: hero / inline-size;
+    position: relative; isolation: isolate; overflow: hidden;
+    display: grid; justify-items: center;
+    border-radius: 2.5rem;
+    padding: var(--space-6) var(--space-4) var(--space-7);
+  }
+  .hero-copy { position: relative; z-index: 1; display: grid; gap: var(--space-5); justify-items: center; text-align: center; width: min(100%, 42rem); }
+  .hero h1 { font-size: var(--text-hero); line-height: 0.94; letter-spacing: -0.055em; font-weight: 800; }
+  .hero h1 span { display: block; }
+  .hero-sub { font-size: var(--text-lg); color: var(--c-muted); max-width: 34ch; }
+  .hero .searchbox { width: 100%; }
+  .hero .chips { justify-content: center; }
+
+  /* One page-load moment: copy rises, stickers pop. Everything has settled by ~450ms. */
+  .hero h1 span, .hero-sub, .hero .searchbox, .hero .chips { animation: rise 320ms var(--ease-out) backwards; }
+  .hero h1 span:nth-child(2) { animation-delay: 40ms; }
+  .hero h1 span:nth-child(3) { animation-delay: 80ms; }
+  .hero-sub { animation-delay: 110ms; }
+  .hero .searchbox { animation-delay: 140ms; }
+  .hero .chips { animation-delay: 170ms; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+
+  /* Objects: a tidy row above the headline on narrow screens, scattered around it when there is room.
+     Each one is a soft illustration that already carries its own shadow. */
+  .stickers { position: relative; z-index: 0; display: flex; justify-content: center; align-items: center; gap: var(--space-1); margin-bottom: var(--space-5); pointer-events: none; }
+  .sticker { --s: 3.6rem; width: var(--s); flex: none; transform: rotate(var(--r, 0deg)); pointer-events: auto; transition: transform var(--dur-2) var(--ease-out); animation: sticker-in 300ms var(--ease-out) backwards; animation-delay: calc(var(--i) * 30ms); }
+  .sticker-art { display: block; width: 100%; height: auto; overflow: visible; }
+  @media (hover: hover) { .sticker:hover { transform: translateY(-4px) rotate(calc(var(--r, 0deg) + 2deg)); } }
+  .st-a { --r: -4deg; } .st-b { --r: 3deg; } .st-c { --r: -2deg; } .st-d { --r: 4deg; } .st-e { --r: -3deg; } .st-f { --r: 3deg; }
+  .st-e, .st-f { display: none; }
+  @keyframes sticker-in { from { opacity: 0; transform: translateY(10px) scale(0.92); } }
+
+  @container hero (min-width: 40rem) {
+    .stickers { position: absolute; inset: 0; display: block; margin: 0; }
+    .sticker { position: absolute; --s: 6rem; }
+    .st-a { left: 4%; top: 7%; }
+    .st-b { right: 4%; top: 6%; }
+    .st-c { left: 3%; bottom: 5%; }
+    .st-d { right: 3%; bottom: 6%; }
+    .st-e, .st-f { display: none; }
+  }
+  @container hero (min-width: 58rem) {
+    .sticker { --s: 8rem; }
+    .st-a { left: 5%; top: 10%; --s: 9rem; }
+    .st-b { right: 5%; top: 8%; }
+    .st-c { left: 8%; bottom: 8%; --s: 7.5rem; }
+    .st-d { right: 8%; bottom: 9%; --s: 7.5rem; }
+    .st-e { display: block; left: 2%; top: 46%; --s: 5.75rem; }
+    .st-f { display: block; right: 2%; top: 45%; --s: 5.75rem; }
+  }
+
+  /* ---------- 404: illustration beside the message when there is room (no card behind it) ---------- */
+  .nf { container: nf / inline-size; }
+  .nf-stage {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-5);
+    min-height: 24rem; padding: var(--space-6) var(--space-4) var(--space-7); text-align: center;
+  }
+  .nf-art { width: min(17rem, 80%); height: auto; overflow: visible; flex: none; }
+  .nf-copy { display: grid; gap: var(--space-4); justify-items: center; }
+  .nf-title { font-size: clamp(3.25rem, 2rem + 6vw, 5.5rem); line-height: 0.94; letter-spacing: -0.055em; font-weight: 800; }
+  .nf-sub { font-size: var(--text-lg); line-height: 1.25; color: var(--c-muted); max-width: 17ch; text-wrap: balance; }
+  .nf-copy .btn { margin-top: var(--space-2); }
+  .nf-num { font-family: var(--font-sans); font-weight: 800; letter-spacing: -0.6px; }
+  .nf-ghost { fill: none; stroke: var(--c-field-border); stroke-width: 0.5; stroke-dasharray: 2 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  @container nf (min-width: 44rem) {
+    .nf-stage { flex-direction: row; gap: var(--space-8); min-height: 28rem; padding: var(--space-7) var(--space-7); text-align: left; }
+    .nf-art { width: min(26rem, 52%); }
+    .nf-copy { justify-items: start; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .nf-art { animation: rise 360ms var(--ease-out) backwards; }
+    .nf-title, .nf-sub, .nf-copy .btn { animation: rise 320ms var(--ease-out) backwards; }
+    .nf-sub { animation-delay: 70ms; }
+    .nf-copy .btn { animation-delay: 140ms; }
+    .nf-lens { transform-box: fill-box; transform-origin: center; animation: nf-sway 4.5s ease-in-out 600ms infinite; }
+    @keyframes nf-sway { 0%, 100% { transform: none; } 50% { transform: translate(-1.6px, -1px) rotate(-5deg); } }
+  }
+
+  /* ---------- Proof of local processing: a stitched pocket on grid paper ---------- */
+  .prose ul.tool-list, .tool-about ul.tool-list { padding-left: 0; max-width: none; }
+
+  .task-list { display: grid; gap: var(--space-4); padding: 0; margin: 0; list-style: none; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .task { position: relative; display: flex; gap: var(--space-3); align-items: center; padding: var(--space-3) var(--space-5) var(--space-3) var(--space-3); border-radius: var(--radius-lg); text-decoration: none; color: var(--c-text); font-weight: 650; font-size: var(--text-sm); min-height: 5rem; transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out); }
+  @media (hover: hover) { .task:hover { color: var(--c-text); transform: translateY(-2px); box-shadow: 0 1px 1px rgb(10 18 48 / 0.04), 0 6px 14px -4px rgb(10 18 48 / 0.09), 0 22px 34px -18px rgb(10 18 48 / 0.28); } }
+  .task-art { flex: none; width: 3.75rem; height: 3.75rem; overflow: visible; }
+  .task-art text { font-family: var(--font-sans); }
+
+  /* How it works: a real sequence, so the numbers stay. Each number is a small soft disc in a muted colour. */
+  .how { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+  .how { max-width: 46rem; }
+  .steps { display: grid; gap: var(--space-5); counter-reset: step; padding: 0; margin: 0; list-style: none; align-content: start; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 2.75rem 1fr; gap: var(--space-4); }
+  .steps li::before { content: counter(step); width: 2.75rem; height: 2.75rem; border-radius: 50%; background: linear-gradient(160deg, #aec4de, #7d99bc); color: var(--c-navy); font-weight: 800; font-size: var(--text-md); display: grid; place-items: center; box-shadow: 0 8px 12px -6px rgb(10 18 48 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.45); }
+  .steps li:nth-child(2)::before { background: linear-gradient(160deg, #e8b6a2, #cf8f76); }
+  .steps li:nth-child(3)::before { background: linear-gradient(160deg, #ead19a, #d2ad65); }
+
+  /* Tool page */
+  .tool-head { display: grid; gap: var(--space-3); margin-bottom: var(--space-6); }
+  .tool-head .badges { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+  .tool-grid { display: grid; gap: var(--space-5); }
+  .tool-about { margin-top: var(--space-8); display: grid; gap: var(--space-5); border-top: 1px solid var(--c-border); padding-top: var(--space-6); }
+  .tool-about ul { margin: 0; padding-left: 1.2rem; display: grid; gap: var(--space-2); max-width: 68ch; }
+  .prose { display: grid; gap: var(--space-4); }
+  .prose h2 { margin-top: var(--space-5); }
+  .prose ul, .prose ol { margin: 0; padding-left: 1.3rem; display: grid; gap: var(--space-2); max-width: 68ch; }
+  .file-chip { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: var(--c-surface-2); border-radius: var(--radius-lg); }
+  .file-chip b { overflow-wrap: anywhere; font-size: var(--text-sm); }
+  .file-chip .grow { flex: 1 1 10rem; min-width: 0; }
+  .file-chip .btn { flex: none; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+  /* ---------- Settings: the sidebar's own look. Plain line icons, pill rows, a hairline between groups. No cards, no tiles. ---------- */
+  .set-page { max-width: 44rem; display: grid; gap: var(--space-5); }
+  .set-page .page-head { margin-bottom: 0; }
+  .set-group { display: grid; gap: var(--space-1); }
+  .set-group + .set-group { padding-top: var(--space-5); border-top: 1px solid var(--c-border); }
+  .set-heading { margin: 0 var(--space-4) var(--space-2); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0; line-height: 1.3; color: var(--c-muted); }
+  .set-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+
+  .set-row {
+    display: flex; align-items: center; gap: var(--space-3); width: 100%; min-height: var(--touch); padding: 0 var(--space-4);
+    border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--c-text); text-align: left; text-decoration: none;
+    font-size: var(--text-sm); font-weight: 600; transition: background var(--dur-1);
+  }
+  @media (hover: hover) { a.set-row:hover, button.set-row:hover:not(:disabled) { background: var(--c-surface-2); color: var(--c-text); } }
+  .set-row:focus-visible { outline-offset: 0; }
+  .set-row:disabled { opacity: 0.5; cursor: not-allowed; }
+  .set-row svg { flex: none; }
+  .set-row.is-danger { color: var(--c-danger); }
+  @media (hover: hover) { .set-row.is-danger:hover:not(:disabled) { color: var(--c-danger); } }
+  .set-title { flex: 1; min-width: 0; }
+  .set-meta { color: var(--c-muted); font-size: var(--text-xs); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .set-chev { color: var(--c-muted); }
+
+  /* Theme picker: each option is a miniature of the page in that theme. The colours are fixed on purpose (they preview
+     the other themes), so they do not follow the active one. Selected is shown by a ring AND a tick, never colour alone. */
+  .set-theme { display: grid; gap: var(--space-1); }
+  .set-theme > .set-row { min-height: 2.25rem; }
+  .set-theme fieldset { padding: 0 var(--space-4); }
+  .theme-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+  .theme-opt { position: relative; display: grid; gap: var(--space-2); cursor: pointer; }
+  .theme-opt input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+  .theme-swatch { position: relative; display: flex; height: 4.75rem; overflow: hidden; border: 2px solid var(--c-border); border-radius: var(--radius-md); transition: border-color var(--dur-1), box-shadow var(--dur-1); }
+  @media (hover: hover) { .theme-opt:hover .theme-swatch { border-color: var(--c-border-strong); } }
+  .theme-opt input:checked ~ .theme-swatch { border-color: var(--c-accent); box-shadow: 0 0 0 3px var(--c-accent-soft); }
+  .theme-opt input:focus-visible ~ .theme-swatch { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .theme-mini { flex: 1; min-width: 0; display: grid; align-content: start; gap: 6px; padding: 9px; background: var(--p-bg); }
+  .theme-mini i { display: block; height: 6px; width: 70%; border-radius: 3px; background: var(--p-line); }
+  .theme-mini i:first-child { width: 38%; background: var(--p-accent); }
+  .theme-mini b { display: block; height: 20px; border-radius: 7px; background: var(--p-surface); border: 1px solid var(--p-line); }
+  .theme-mini[data-look='light'] { --p-bg: #ffffff; --p-surface: #f0f4fc; --p-line: #dbe4f6; --p-accent: #0040fe; }
+  .theme-mini[data-look='dim'] { --p-bg: #101c3a; --p-surface: #17264b; --p-line: #2c3f72; --p-accent: #7ea4ff; }
+  .theme-mini[data-look='dark'] { --p-bg: #0b0c10; --p-surface: #14161c; --p-line: #262a34; --p-accent: #7ea4ff; }
+  .theme-check { display: none; position: absolute; top: 6px; right: 6px; box-sizing: content-box; padding: 3px; border-radius: 50%; background: var(--c-accent); color: var(--c-accent-ink); }
+  .theme-opt input:checked ~ .theme-swatch .theme-check { display: block; }
+  .theme-name { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.1rem 0.4rem; text-align: center; font-size: var(--text-sm); font-weight: 650; color: var(--c-muted); }
+  .theme-name svg { flex: none; }
+  .theme-opt input:checked ~ .theme-name { color: var(--c-text); }
+
+  /* Invite link: one line, link text then two small pill buttons; wraps under the text on narrow screens */
+  .set-invite { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); padding: 0 var(--space-4); min-height: var(--touch); }
+  .set-invite > svg { flex: none; }
+  .set-invite input { flex: 1 1 12rem; min-width: 0; height: var(--touch); padding: 0; border: 0; background: transparent; outline: none; font-size: var(--text-sm); font-weight: 600; text-overflow: ellipsis; }
+  .set-invite input:focus { text-decoration: underline; text-underline-offset: 0.2em; }
+  .set-invite .actions { gap: var(--space-2); }
+  .set-status { margin: 0 var(--space-4); font-size: var(--text-xs); color: var(--c-muted); }
+  .set-status:empty { margin: 0; }
+
+  @media (min-width: 40rem) {
+    .hero-stage { padding: var(--space-7) var(--space-6) var(--space-8); }
+  }
+  @media (min-width: 44rem) {
+    .theme-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (min-width: 64rem) {
+    .tool-grid.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  }
+}

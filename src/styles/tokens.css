@@ -1,0 +1,180 @@
+/* FileFreedom design tokens. Colour pairs are checked against WCAG AA
+   by src/test/contrast.test.ts for both themes. */
+:root {
+  --font-sans: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  --text-hero: clamp(2.75rem, 1.2rem + 6.6vw, 6.25rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem; --space-7: 3rem; --space-8: 4.5rem; --space-9: 7rem;
+
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-xl: 32px; --radius-pill: 999px;
+
+  --content-max: 76rem;
+  --header-h: 5rem;
+  --touch: 2.75rem;
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 120ms; --dur-2: 220ms; --dur-3: 420ms;
+
+  --z-header: 40; --z-menu: 50; --z-toast: 60;
+
+  /* Brand colours, sampled from the logo mark. Used as fills; text on them uses --c-navy or white. */
+  --c-blue: #0040fe;
+  --c-sky: #72b4fe;
+  --c-orange: #fe7c01;
+  --c-yellow: #febf1f;
+  --c-navy: #0a1230;
+  --c-sky-soft: #d3e5ff;
+  --c-orange-soft: #ffe7d3;
+  --c-yellow-soft: #fff1c4;
+
+  --c-bg: #ffffff;
+  --c-surface: #ffffff;
+  --c-surface-2: #f0f4fc;
+  --c-text: #0a1230;
+  --c-muted: #4a5578;
+  --c-border: #dbe4f6;
+  --c-border-strong: #b4c2de;
+  --c-field-border: #8497c0;
+  --c-accent: #0040fe;
+  --c-accent-hover: #0031c9;
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: #e0e9ff;
+  --c-success: #0f6b3d;
+  --c-success-soft: #dff3e8;
+  --c-warning: #8a4b00;
+  --c-star: #f7b733; --c-star-line: #b87400;
+  --c-warning-soft: #fdeccc;
+  --c-danger: #b3261e;
+  --c-danger-soft: #fbe3e0;
+  --focus: #0040fe;
+  --shadow-1: 0 1px 2px rgb(10 18 48 / 0.05), 0 6px 16px -8px rgb(10 18 48 / 0.12);
+  --shadow-2: 0 20px 44px -20px rgb(10 18 48 / 0.3);
+  --shadow-sticker: 0 8px 16px -6px rgb(10 18 48 / 0.3);
+
+  --cat-image-bg: #0040fe; --cat-image-ink: #ffffff;
+  --cat-pdf-bg: #fe7c01; --cat-pdf-ink: #0a1230;
+  --cat-data-bg: #febf1f; --cat-data-ink: #0a1230;
+  --cat-text-bg: #72b4fe; --cat-text-ink: #0a1230;
+  --cat-security-bg: #0a1230; --cat-security-ink: #ffffff;
+  --cat-neutral-bg: #e9f0fd; --cat-neutral-ink: #3a4668;
+}
+
+/* Dark: near-black, neutral. Also used when the device asks for dark and no theme is saved. */
+:root[data-theme='dark'] {
+  --c-sky-soft: #1a2238;
+  --c-orange-soft: #33200f;
+  --c-yellow-soft: #33290c;
+
+  --c-bg: #0b0c10;
+  --c-surface: #14161c;
+  --c-surface-2: #1e2129;
+  --c-text: #f3f4f8;
+  --c-muted: #a3a8b8;
+  --c-border: #262a34;
+  --c-border-strong: #3b4150;
+  --c-field-border: #5f667a;
+  --c-accent: #7ea4ff;
+  --c-accent-hover: #a2bfff;
+  --c-accent-ink: #050b21;
+  --c-accent-soft: #1b2750;
+  --c-success: #6fdc9f;
+  --c-success-soft: #13261c;
+  --c-warning: #f2b45c; --c-star: #f2b45c; --c-star-line: #f2b45c;
+  --c-warning-soft: #33280f;
+  --c-danger: #ff8f86;
+  --c-danger-soft: #341a18;
+  --focus: #a2bfff;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 20px 44px -20px rgb(0 0 0 / 0.9);
+  --shadow-sticker: 0 8px 16px -6px rgb(0 0 0 / 0.7);
+
+  --cat-image-bg: #0040fe; --cat-image-ink: #ffffff;
+  --cat-pdf-bg: #fe7c01; --cat-pdf-ink: #0a1230;
+  --cat-data-bg: #febf1f; --cat-data-ink: #0a1230;
+  --cat-text-bg: #72b4fe; --cat-text-ink: #0a1230;
+  --cat-security-bg: #e9f0fd; --cat-security-ink: #0a1230;
+  --cat-neutral-bg: #232733; --cat-neutral-ink: #c6cbd8;
+}
+
+/* Dim: dark blue. */
+:root[data-theme='dim'] {
+  --c-sky-soft: #1d3270;
+  --c-orange-soft: #3a2210;
+  --c-yellow-soft: #3a2f0d;
+
+  --c-bg: #101c3a;
+  --c-surface: #17264b;
+  --c-surface-2: #213461;
+  --c-text: #f2f5ff;
+  --c-muted: #b0bde0;
+  --c-border: #2c3f72;
+  --c-border-strong: #46599b;
+  --c-field-border: #7186bd;
+  --c-accent: #7ea4ff;
+  --c-accent-hover: #a2bfff;
+  --c-accent-ink: #050b21;
+  --c-accent-soft: #1b3275;
+  --c-success: #6fdc9f;
+  --c-success-soft: #14301f;
+  --c-warning: #f2b45c; --c-star: #f2b45c; --c-star-line: #f2b45c;
+  --c-warning-soft: #3a2a10;
+  --c-danger: #ff8f86;
+  --c-danger-soft: #3d1b19;
+  --focus: #a2bfff;
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 20px 44px -20px rgb(0 0 0 / 0.8);
+  --shadow-sticker: 0 8px 16px -6px rgb(0 0 0 / 0.6);
+
+  --cat-image-bg: #0040fe; --cat-image-ink: #ffffff;
+  --cat-pdf-bg: #fe7c01; --cat-pdf-ink: #0a1230;
+  --cat-data-bg: #febf1f; --cat-data-ink: #0a1230;
+  --cat-text-bg: #72b4fe; --cat-text-ink: #0a1230;
+  --cat-security-bg: #e9f0fd; --cat-security-ink: #0a1230;
+  --cat-neutral-bg: #26396c; --cat-neutral-ink: #c6d2f5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --c-sky-soft: #1a2238;
+    --c-orange-soft: #33200f;
+    --c-yellow-soft: #33290c;
+
+    --c-bg: #0b0c10;
+    --c-surface: #14161c;
+    --c-surface-2: #1e2129;
+    --c-text: #f3f4f8;
+    --c-muted: #a3a8b8;
+    --c-border: #262a34;
+    --c-border-strong: #3b4150;
+    --c-field-border: #5f667a;
+    --c-accent: #7ea4ff;
+    --c-accent-hover: #a2bfff;
+    --c-accent-ink: #050b21;
+    --c-accent-soft: #1b2750;
+    --c-success: #6fdc9f;
+    --c-success-soft: #13261c;
+    --c-warning: #f2b45c; --c-star: #f2b45c; --c-star-line: #f2b45c;
+    --c-warning-soft: #33280f;
+    --c-danger: #ff8f86;
+    --c-danger-soft: #341a18;
+    --focus: #a2bfff;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+    --shadow-2: 0 20px 44px -20px rgb(0 0 0 / 0.9);
+    --shadow-sticker: 0 8px 16px -6px rgb(0 0 0 / 0.7);
+
+    --cat-image-bg: #0040fe; --cat-image-ink: #ffffff;
+    --cat-pdf-bg: #fe7c01; --cat-pdf-ink: #0a1230;
+    --cat-data-bg: #febf1f; --cat-data-ink: #0a1230;
+    --cat-text-bg: #72b4fe; --cat-text-ink: #0a1230;
+    --cat-security-bg: #e9f0fd; --cat-security-ink: #0a1230;
+    --cat-neutral-bg: #232733; --cat-neutral-ink: #c6cbd8;
+  }
+}

@@ -1,0 +1,11 @@
+/** The FileFreedom mark: two folded ribbons (blue over light blue, orange over yellow). Colours are fixed brand colours. */
+export function BrandMark({ size = 32 }: { size?: number }) {
+  return (
+    <svg width={size} height={Math.round(size * 600 / 583)} viewBox="0 0 583 600" aria-hidden="true" focusable="false">
+      <path fill="#72b4fe" d="M243 142L562.4 142L246.5 358L243 358Z" />
+      <path fill="#0040fe" d="M0 190A190 190 0 0 1 190 0L561 0A22 22 0 0 1 583 22L583 95A55 55 0 0 1 528 150L318 150A75 75 0 0 0 243 225L243 303A55 55 0 0 1 188 358L55 358A55 55 0 0 1 0 303Z" />
+      <path fill="#febf1f" d="M271 404L559 404L272.4 600L271 600Z" />
+      <path fill="#fe7c01" d="M449.4 219.4A14 14 0 0 1 457.3 217L560 217A22 22 0 0 1 582 239L582 361A55 55 0 0 1 527 416L346 416A75 75 0 0 0 271 491L271 570A30 30 0 0 1 241 600L31 600A30 30 0 0 1 1 570L1 412A22 22 0 0 1 23 390L196.9 390A10 10 0 0 0 202.6 388.3Z" />
+    </svg>
+  );
+}
